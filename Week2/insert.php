@@ -6,8 +6,27 @@ if(!isset($_POST["email"]) or !isset($_POST["password"]) or !isset($_POST["fname
 }
 else{
 $email = $_POST["email"];
-$email = $_POST["password"];
-$email = $_POST["fname"];
-$email = $_POST["lname"];
+$password = $_POST["password"];
+$fname = $_POST["fname"];
+$lname = $_POST["lname"];
+
+$sql = "INSERT INTO `t_users`(
+    `UID`,
+    `email`,
+    `password`,
+    `fname`,
+    `lname`,
+    `timestamp`
+)
+VALUES(
+    NULL,
+    '$email',
+    '$password',
+    '$fname',
+    '$lname',
+    CURRENT_TIMESTAMP());";
+    mysqli_query($db_connect,$sql);
+    echo $email." has been added";
+    header("Location:index.php");
 }
 ?>

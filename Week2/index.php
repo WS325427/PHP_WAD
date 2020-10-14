@@ -10,7 +10,7 @@
     <br>
     <input type="text" name="lname" required placeholder="Last Name">
     <br>
-    <button type="submit">LOGIN</button>
+    <button type="submit">ADD</button>
 
 </form>
 
@@ -49,8 +49,8 @@ $run = mysqli_query($db_connect, $sql);
                     ?></td>
                 <td><?= $result["fname"] ?></td>
                 <td><?= $result["lname"] ?></td>
-                <td>Edit</td>
-                <td>Delete</td>
+                <td><a href="edit.php?e=<?=$result["UID"]?>">EDIT</a></td>
+                <td><a href="delete.php?d=<?=$result["UID"]?>">Delete</a></td>
             </tr>
         <?php }; ?>
 
