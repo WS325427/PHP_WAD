@@ -29,7 +29,7 @@
     }
 </style>
 <?php 
-include_once("_login_check.php");
+//include_once("_login_check.php");
 ?>
 <h1 class="title">DEEETS</h1>
 <a href="logout.php">Log Out </a>
