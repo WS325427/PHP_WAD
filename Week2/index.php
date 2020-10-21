@@ -28,7 +28,11 @@
         font-style:oblique;
     }
 </style>
+<?php 
+include_once("_login_check.php");
+?>
 <h1 class="title">DEEETS</h1>
+<a href="logout.php">Log Out </a>
 <div class="form">
     <form method="POST" action="insert.php">
         <input class="input" type="email" name="email" required placeholder="E-mail">

@@ -1,4 +1,5 @@
 <?php
+include_once("_login_check.php");
 include_once("_connect.php");
 if (!isset($_GET["e"])) {
     die("No user selected for edit");
