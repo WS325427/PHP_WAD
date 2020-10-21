@@ -1,5 +1,5 @@
 <?php
-//include_once("_login_check.php");
+include_once("_login_check.php");
 include_once("_connect.php");
 if(!isset($_GET["d"]))
 {
@@ -12,7 +12,7 @@ else
     mysqli_query($db_connect,$sql);
     echo "User ID $uid has been deleted.";
 
- //   header("Location:index.php");
+    header("Location:index.php");
 }
 
 
