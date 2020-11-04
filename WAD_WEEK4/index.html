@@ -142,7 +142,7 @@
         </div>
 
         <div class="col-sm-8">
-          <table id = "myTable" class="table table-bordered table-hover">
+          <table id="myTable" class="table table-bordered table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -155,7 +155,7 @@
               <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
-                <td>Otto</td>
+                <td><a class="btn btn-danger" href="delete.php">DELETE</a></td>
                 <td>@mdo</td>
               </tr>
               <tr>
@@ -172,6 +172,100 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-sm-4">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+              <small id="emailHelp" class="form-text text-muted"
+                >We'll never share your email with anyone else.</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >Check me out</label
+              >
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </div>
+        <div class="col-sm-8">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+          >
+            Launch static backdrop modal
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="staticBackdrop"
+            data-backdrop="static"
+            data-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                    Modal title
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">SURPRISEE!</div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Understood
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- <h1>Bootstrap starter template</h1>
