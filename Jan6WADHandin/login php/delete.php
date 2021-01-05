@@ -1,6 +1,7 @@
 <?php
-include_once("_login_check.php");
+include_once("admin_login_check.php");
 include_once("_connect.php");
+//gets from link headers
 if(!isset($_GET["d"]))
 {
     echo "No user selected for deletion";
@@ -12,11 +13,7 @@ else
     mysqli_query($db_connect,$sql);
     echo "User ID $uid has been deleted.";
 
-    header("Location:index.php");
+    header("Location:admin.php");
 }
-
-
-
-
 
 ?>

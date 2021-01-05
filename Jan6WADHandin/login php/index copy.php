@@ -1,33 +1,4 @@
-<!-- 
-<style>
-    .form {
-        display: flex;
-        border: dotted;
-        margin: auto;
-        width: 200px;
-        border: 3px solid green;
-        padding: 10px;
-        text-align: center;
-    }
-    .table {
-        margin: auto;
-        width: 50%;
-        padding: 10px;
-        text-align: center;
-        border:solid;
-    }
-    .input{
-        border:solid;
-        text-align: left;
-    }
-    .title{
-        color: red;
-        text-align: center;
-        font-size: 5em;
-        font-family: "Times New Roman", Times, serif;
-        font-style:oblique;
-    }
-</style> -->
+
 <style>
     #logout{
         font-size: 20px;
@@ -38,7 +9,7 @@
 
 
 <?php 
-include_once("_login_check.php");
+include_once("admin_login_check.php");
 ?>
 <html lang="en">
   <head>
@@ -119,6 +90,8 @@ include_once("_login_check.php");
 <!-- <h1 class="title">DEEETS</h1> -->
 <button id="Log Out"><a href="logout.php"><div>LOG Out</div> </a></button>
 <div class="form">
+  <!-- action="script to call" -->
+  <!-- name="database header to add to" -->
     <form method="POST" action="insert.php">
         <input class="input" type="email" name="email" required placeholder="E-mail">
         <br>
@@ -185,7 +158,7 @@ $run = mysqli_query($db_connect, $sql);
                     ?></td>
                 <td><?= $result["fname"] ?></td>
                 <td><?= $result["lname"] ?></td>
-                <td><a href="edit.php?e=<?= $result["UID"] ?>">EDIT</a></td>
+                <td><a href="edit.php?id=<?= $result["UID"] ?>">EDIT</a></td>
                 <td><a href="delete.php?d=<?= $result["UID"] ?>">Delete</a></td>
             </tr>
           <?php };};
