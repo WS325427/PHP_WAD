@@ -2,14 +2,15 @@
 include_once("admin_login_check.php");
 include_once("_connect.php");
 //gets from link headers
-if(!isset($_GET["d"]))
+if(!isset($_GET["d"]) or !isset($_GET["table"]) )
 {
-    echo "No user selected for deletion";
+    die ("No table or user selected for deletion");
 }
 else
-{
+{   $table = $_GET["table"];
     $uid = $_GET["d"];
-    $sql = "DELETE FROM `t_users` WHERE `t_users`.`UID` = $uid" ;
+    $idType = $table == "t_users" ? "UID" : "CID";
+    $sql = "DELETE FROM $table WHERE $table.$idType = $uid" ;
     mysqli_query($db_connect,$sql);
     echo "User ID $uid has been deleted.";
 

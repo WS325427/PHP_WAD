@@ -4,9 +4,6 @@
 include_once("admin_login_check.php");
 //connects to db
 include_once("_connect.php");
-
-$sql = "SELECT * FROM `t_users`";
-$run = mysqli_query($db_connect, $sql);
 ?>
 
 <style>
@@ -33,6 +30,10 @@ $run = mysqli_query($db_connect, $sql);
 
   .right-align {
     margin-left: auto;
+  }
+
+  .addButton {
+    transform: scale(0.5) translate(-100px, 8px);
   }
 </style>
 
@@ -66,11 +67,15 @@ $run = mysqli_query($db_connect, $sql);
   </div>
 
   <main role="main" class="container">
-    <button><a href="addEmployee.php">
-        <div>Add Employee to Course</div>
-      </a></button>
-    <h2>Registered Employees</h2>
-    <button onclick="tableshowOrHideEmployeeTable()">Show/Hide</button>
+    <?php $table = "t_users"; ?>
+    <h2>Registered Employees
+      <button class="addButton"><a href="addToTable.php?table=<?= $table ?>">
+          <div>Add Employee</div>
+        </a></button>
+    </h2>
+
+
+    <button onclick="tableshowOrHideTable(`usersTable`)">Show/Hide</button>
     <!-- <h1 class="title">DEEETS</h1> -->
     <!-- //shows the format data is returned
 //var_dump($run)
@@ -92,11 +97,10 @@ $run = mysqli_query($db_connect, $sql);
         </thead>
         <tbody>
           <?php
+          $sql = "SELECT * FROM $table";
+          $run = mysqli_query($db_connect, $sql);
           while ($result = mysqli_fetch_assoc($run)) {
-
           ?>
-
-
             <tr>
               <td><?= $result["email"] ?></td>
               <td><?php echo $result["password"] ?></td>
@@ -104,8 +108,8 @@ $run = mysqli_query($db_connect, $sql);
               <td><?= $result["lname"] ?></td>
               <td><?= $result["jobRole"] ?></td>
               <td><?= $result["access"] ?></td>
-              <td><a href="edit.php?id=<?= $result["UID"] ?>">EDIT</a></td>
-              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["UID"] ?>">Delete</a></td>
+              <td><a href="edit.php?id=<?= $result["UID"] ?>&table=<?= $table ?>">EDIT</a></td>
+              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?=$result["UID"]?>&table=<?=$table?>">Delete</a></td>
             </tr>
 
           <?php
@@ -118,20 +122,26 @@ $run = mysqli_query($db_connect, $sql);
     </div>
 
 
+    <?php $table = "t_course"; ?>
+    <h2>Courses Available
+      <button class="addButton"><a href="addToTable.php?table=<?= $table ?>">
+          <div>Add Course</div>
+        </a></button>
+    </h2>
 
-    <h2>Courses Available</h2>
-    <button onclick="tableshowOrHideCourseTable()">Show/Hide</button>
+    <button onclick="tableshowOrHideTable(`courseTable`)">Show/Hide</button>
 
     <div id="courseTable">
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th class="table">Email</th>
-            <th class="table">Password</th>
-            <th class="table">First Name</th>
-            <th class="table">Last Name</th>
-            <th class="table">Job Role</th>
-            <th class="table">Access Level</th>
+            <th class="table">Course Title</th>
+            <th class="table">Start Date</th>
+            <th class="table">End Date</th>
+            <th class="table">Duration</th>
+            <th class="table">Description</th>
+            <th class="table">Enrolled</th>
+            <th class="table">Capacity</th>
             <th class="table">Edit</th>
             <th class="table">Delete</th>
 
@@ -139,21 +149,21 @@ $run = mysqli_query($db_connect, $sql);
         </thead>
         <tbody>
           <?php
-          //for some reason, need to initialise query again
-          //Need to create table
-          $sql = "SELECT * FROM `t_users`";
+
+          $sql = "SELECT * FROM $table";
           $run = mysqli_query($db_connect, $sql);
           while ($result = mysqli_fetch_assoc($run)) {
           ?>
             <tr>
-              <td><?= $result["email"] ?></td>
-              <td><?php echo $result["password"] ?></td>
-              <td><?= $result["fname"] ?></td>
-              <td><?= $result["lname"] ?></td>
-              <td><?= $result["jobRole"] ?></td>
-              <td><?= $result["access"] ?></td>
-              <td><a href="edit.php?id=<?= $result["UID"] ?>">EDIT</a></td>
-              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["UID"] ?>">Delete</a></td>
+              <td><?= $result["CourseTitle"] ?></td>
+              <td><?php echo $result["CourseDate"] ?></td>
+              <td><?= $result["CourseEnd"] ?></td>
+              <td>TODO php function calculate date difference</td>
+              <td><?= $result["description"] ?></td>
+              <td>TODO (query table join count)</td>
+              <td><?= $result["CourseCapacity"] ?></td>
+              <td><a href="edit.php?id=<?= $result["CID"] ?>&table=<?= $table ?>">EDIT</a></td>
+              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["CID"]?>&table=<?=$table?>">Delete</a></td>
             </tr>
 
           <?php
@@ -169,21 +179,12 @@ $run = mysqli_query($db_connect, $sql);
 </html>
 
 <script>
-  tableshowOrHideEmployeeTable = () => {
-    var table = document.getElementById("usersTable");
+  tableshowOrHideTable = (table) => {
+    var table = document.getElementById(table);
     if (table.style.display === "none") {
       table.style.display = "block";
     } else {
       table.style.display = "none";
     }
   }
-  tableshowOrHideCourseTable = () => {
-    var table = document.getElementById("courseTable");
-    if (table.style.display === "none") {
-      table.style.display = "block";
-    } else {
-      table.style.display = "none";
-    }
-  }
-
 </script>

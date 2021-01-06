@@ -27,6 +27,7 @@ if (!isset($_POST["email"]) or !isset($_POST["password"])) {
         session_start();
         $_SESSION["auth"] = $result["access"];
         $_SESSION["name"] = $result["fname"];
+        $_SESSION["ID"] = $result["UID"];
         //headers can often hide errors so may need to be commented out to check
         if($_SESSION["auth"] === "admin"){
             header("Location:admin.php");
