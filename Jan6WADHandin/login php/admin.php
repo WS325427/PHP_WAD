@@ -109,7 +109,7 @@ include_once("_connect.php");
               <td><?= $result["jobRole"] ?></td>
               <td><?= $result["access"] ?></td>
               <td><a href="edit.php?id=<?= $result["UID"] ?>&table=<?= $table ?>">EDIT</a></td>
-              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?=$result["UID"]?>&table=<?=$table?>">Delete</a></td>
+              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["UID"] ?>&table=<?= $table ?>">Delete</a></td>
             </tr>
 
           <?php
@@ -150,20 +150,33 @@ include_once("_connect.php");
         <tbody>
           <?php
 
-          $sql = "SELECT * FROM $table";
+          $sql = "SELECT `t_course`.*, COUNT(`t_enrolment`.UID) AS 'counts' 
+                  FROM `t_course` 
+                  LEFT JOIN `t_enrolment` ON `t_enrolment`.`CID` = `t_course`.`CID` 
+                  GROUP BY CID";
+
+
           $run = mysqli_query($db_connect, $sql);
           while ($result = mysqli_fetch_assoc($run)) {
+            $startDate = '"' . $result["CourseDate"] . '"';
+            $endDate = '"' . $result["CourseEnd"] . '"';
+
+            $dateDiffQuery = "SELECT TIMESTAMPDIFF(WEEK,$startDate,$endDate)";
+            $runDateDiff = mysqli_query($db_connect, $dateDiffQuery);
+            $duration = mysqli_fetch_array($runDateDiff);
+
+
           ?>
             <tr>
               <td><?= $result["CourseTitle"] ?></td>
-              <td><?php echo $result["CourseDate"] ?></td>
+              <td><?php echo  $result["CourseDate"] ?></td>
               <td><?= $result["CourseEnd"] ?></td>
-              <td>TODO php function calculate date difference</td>
+              <td><?= $duration[0] ?> Weeks</td>
               <td><?= $result["description"] ?></td>
-              <td>TODO (query table join count)</td>
+              <td><?= $result["counts"] ?></td>
               <td><?= $result["CourseCapacity"] ?></td>
               <td><a href="edit.php?id=<?= $result["CID"] ?>&table=<?= $table ?>">EDIT</a></td>
-              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["CID"]?>&table=<?=$table?>">Delete</a></td>
+              <td><a onclick="return confirm('Are you sure?')" href="delete.php?d=<?= $result["CID"] ?>&table=<?= $table ?>">Delete</a></td>
             </tr>
 
           <?php
@@ -173,6 +186,7 @@ include_once("_connect.php");
         </tbody>
 
       </table>
+    </div>
   </main><!-- /.container -->
 </body>
 
